@@ -1,19 +1,41 @@
 services:
   hermes:
     image: ghcr.io/adit-firdaus/hermes-docker:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      cache_from:
+        - ghcr.io/adit-firdaus/hermes-docker:buildcache
+      cache_to:
+        - type=inline
     container_name: hermes-agent
+    env_file:
+      - .env
     volumes:
       - ./data:/app/data
       - ./scripts:/app/scripts
-      - hermes-config:/root/.hermes
+      - hermes-config:/home/hermes/.hermes
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - HERMES_HOME=/root/.hermes
+      - HERMES_HOME=/home/hermes/.hermes
       - NODE_ENV=production
     working_dir: /app
     stdin_open: true
     tty: true
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: 3
     command: tail -f /dev/null
 
 volumes:

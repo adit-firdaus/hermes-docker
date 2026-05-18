@@ -1,0 +1,14 @@
+# Local development override
+# This file is automatically loaded by docker compose
+# Copy to docker-compose.override.yml and customize
+
+services:
+  hermes:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hermes-docker:local
+    volumes:
+      - ./src:/app/src:ro
+    environment:
+      - DEBUG=true
