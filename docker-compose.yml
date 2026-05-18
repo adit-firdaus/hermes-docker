@@ -1,8 +1,6 @@
 services:
   hermes:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/adit-firdaus/hermes-docker:latest
     container_name: hermes-agent
     volumes:
       - ./data:/app/data
