@@ -1,3 +1,4 @@
+.env
 hermes-webui/
 .DS_Store
 data/
