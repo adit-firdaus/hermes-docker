@@ -16,6 +16,9 @@ fi
 while true; do
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting Hermes gateway..."
 
+    # Fix ownership of config files created during root docker exec sessions
+    chown -R hermes:hermes /opt/data 2>/dev/null || true
+
     # Run gateway in background so this script stays PID 1
     /opt/hermes/docker/entrypoint.sh hermes gateway &
     GATEWAY_PID=$!
