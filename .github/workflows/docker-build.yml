@@ -11,6 +11,7 @@ env:
 
 jobs:
   build:
+    # Public repo = 4 vCPU, 16 GB RAM (highest free tier as of 2026)
     runs-on: ubuntu-latest
     permissions:
       contents: read
