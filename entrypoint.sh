@@ -6,4 +6,6 @@ if [ "$#" -gt 0 ] && [ "$1" != "tail" ]; then
 fi
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting Hermes gateway..."
-exec hermes gateway
+
+# Delegate to the official entrypoint which drops privileges to the 'hermes' user
+exec /opt/hermes/docker/entrypoint.sh hermes gateway
