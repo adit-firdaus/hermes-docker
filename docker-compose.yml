@@ -36,7 +36,6 @@ services:
       options:
         max-size: 10m
         max-file: 3
-    command: tail -f /dev/null
 
 volumes:
   hermes-config:

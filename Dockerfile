@@ -57,6 +57,10 @@ COPY --from=builder /root/.cache /home/hermes/.cache
 # Fix ownership
 RUN chown -R hermes:hermes /home/hermes /usr/local/lib/hermes-agent /usr/local/bin/hermes
 
+# Copy entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Switch to non-root user
 USER hermes
 WORKDIR /home/hermes
@@ -70,5 +74,5 @@ ENV NODE_ENV=production
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD hermes --version || exit 1
 
-# Keep container running
-CMD ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD []
