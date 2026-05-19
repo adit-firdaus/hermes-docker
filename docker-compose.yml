@@ -1,6 +1,8 @@
 services:
   hermes:
     image: ghcr.io/adit-firdaus/hermes-docker:latest
+    # Derives from official nousresearch/hermes-agent:main
+    # Optimized for Dokploy with auto gateway + idle mode logs
     build:
       context: .
       dockerfile: Dockerfile
@@ -14,10 +16,10 @@ services:
     volumes:
       - ./data:/app/data
       - ./scripts:/app/scripts
-      - hermes-config:/home/hermes/.hermes
+      - hermes-config:/opt/data
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - HERMES_HOME=/home/hermes/.hermes
+      - HERMES_HOME=/opt/data
       - NODE_ENV=production
     working_dir: /app
     stdin_open: true

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
 if [ "$#" -gt 0 ] && [ "$1" != "tail" ]; then
@@ -10,7 +10,7 @@ if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] || [ -n "${DISCORD_BOT_TOKEN:-}" ]; then
     exec hermes gateway
 fi
 
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Hermes agent container started."
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] No gateway tokens configured. Running in idle mode."
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] To use Hermes interactively: docker exec -it hermes-agent bash"
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Hermes container ready."
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] No gateway tokens configured. Idle mode."
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] To use Hermes: docker exec -it <container> bash"
 exec tail -f /dev/null
