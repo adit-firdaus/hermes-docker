@@ -10,7 +10,6 @@ services:
         - ghcr.io/adit-firdaus/hermes-docker:buildcache
       cache_to:
         - type=inline
-    container_name: hermes-agent
     env_file:
       - .env
     volumes:
